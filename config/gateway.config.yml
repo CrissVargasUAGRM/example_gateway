@@ -3,6 +3,9 @@ http:
 admin:
   port: 9876
   host: localhost
+routes:
+  - path: /user/users
+  - path: /post/posts
 apiEndpoints:
   api:
     host: localhost
