@@ -5,16 +5,16 @@ admin:
   host: localhost
 apiEndpoints:
   api:
-    host: localhost
+    host: https://example-gateway.onrender.com/
     paths: '/ip'
   user:
-    host: localhost
+    host: https://example-gateway.onrender.com/
     paths: ['/user', '/user/*']
   post:
-    host: localhost
+    host: https://example-gateway.onrender.com/
     paths: ['/post', '/post/*']
   aggregator:
-    host: localhost
+    host: https://example-gateway.onrender.com/
     paths: ['/user-post', '/user-post/*']
 serviceEndpoints:
   httpbin:
