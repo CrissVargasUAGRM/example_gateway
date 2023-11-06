@@ -1,11 +1,12 @@
 http:
-  port: 80
+  port: 8061
 admin:
   port: 9876
   host: localhost
 routes:
   - path: /user/users
   - path: /post/posts
+  - path: /user-post
 apiEndpoints:
   api:
     host: localhost
@@ -26,8 +27,6 @@ serviceEndpoints:
     url: 'https://jsonplaceholder.typicode.com/users'
   postService:
     url: 'https://jsonplaceholder.typicode.com/posts'
-  aggregatorService:
-    url: 'http://localhost:8080/users-posts'
 policies:
   - basic-auth
   - cors
@@ -37,6 +36,9 @@ policies:
   - oauth2
   - proxy
   - rate-limit
+  - middleware
+customPolicies:
+  - myCustomPolicy: './middleware-policy.js'
 pipelines:
   default:
     apiEndpoints:
@@ -62,4 +64,12 @@ pipelines:
           - action:
               serviceEndpoint: postService
               changeOrigin: true
+  apiPipeline:
+    apiEndpoints:
+      - aggregator
+    policies:
+      - middleware: 
+          - action:
+              changeOrigin: true
+              baseUrl: ['https://jsonplaceholder.typicode.com/users', 'https://jsonplaceholder.typicode.com/posts']
 
